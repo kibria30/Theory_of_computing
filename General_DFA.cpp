@@ -1,15 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int traverse(string str, char final){
-    char curr = str[0];
-    if(curr == final){
-        return 1;
-    }else{
-
-    }
-}
-
 int main()
 {
     int numberOfState, numOfAlpha;
@@ -61,7 +52,7 @@ int main()
     for(int i=0; i<str.size(); i++){
         for(int j=0; j<numOfAlpha; j++){
             if(str[i] == alphabet[j]){
-                curr = transition[curr-start][j];  // (curr - start) korle oi state/row er index pawa jay
+                curr = transition[abs(curr-start)][j];  // (curr - start) korle oi state/row er index pawa jay
                 break;
             }
         }

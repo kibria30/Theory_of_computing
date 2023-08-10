@@ -9,13 +9,22 @@ char alphabet[1000];
 char transition[1000][1000][1000];
 char str[1000], start, final;
 
-int traverse(string str, char start, char final){
-    char curr = start;
-    if(curr == final){
-        return 1;
-    }else{
-
+bool traverse(int ptr, char curr){
+    cout<<curr<<" -> ";
+    bool result = 0;
+    for(int i=ptr; i<strlen(str)-1; i++){
+        for(int j = 0; j<numOfAlpha; j++){
+            if(str[i] == alphabet[j]){
+                for(int k=0; k<countOftransition[abs(curr-states[0])][j]; k++){
+                    curr = transition[abs(curr-states[0])][j][k];
+                    
+                    result = result || traverse(i+1, curr);
+                }               
+            }
+        }
     }
+
+    return curr == final;
 }
 
 int main(){
@@ -51,7 +60,7 @@ int main(){
     for(int i=0; i<numberOfState; i++){
         for(int j=0; j<numOfAlpha; j++){
             for(int k=0; k<countOftransition[i][j]; k++){
-                cout<<transition[i][j]<<" ";
+                cout<<transition[i][j][k]<<" ";
             }
            
         }
@@ -67,23 +76,6 @@ int main(){
     cin>>final;
     curr = start;
     cout<<"path: ";
-    cout<<curr<<"->";
-    for(int i=0; i<str.size()-1; i++){
-        for(int j=0; j<numOfAlpha; j++){
-            for(int k=0; k<countOftransition[i][j]; k++){
-                if(str[i] == alphabet[j] && str[i+1] == 1){
-                    curr = transition[abs(curr-start)][j][k++];  // (curr - start) korle oi state/row er index pawa jay
-                    break;
-                }
-                if(str[i] == alphabet[j] && str[i+1] == 0){
-                    curr = transition[abs(curr-start)][j][k];
-                    break;
-                }
-            }
-        }
-        cout<<curr<<"->";
-    }
-    cout<<endl;
-    if(curr == final) cout<<"Accepted"<<endl;
-    else cout<<"Rejected"<<endl;
+    if(traverse(0, start)) cout<<"Accepted"<<endl;
+    else cout<<"Rejected"<<endl<<endl<<endl;
 }

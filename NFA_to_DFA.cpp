@@ -3,9 +3,10 @@
 using namespace std;
 
 int numOfStates, numOfAlpha, countOfTransition[MAX][MAX];
-char NFA_states[MAX], alphabet[MAX];
+char alphabet[MAX];
+char NFA_states[MAX];    // states must be interger
 char NFA_table[MAX][MAX][MAX];
-string DFA_states[MAX], DFA_table[MAX][MAX];
+char DFA_states[MAX], DFA_table[MAX][MAX];
 
 void getNFA_table(){
     cout << "Number of states: ";
@@ -50,7 +51,7 @@ void print_NFA_table(){
 void convert(string state){
     int stateIndex = abs(state - NFA_states[0]);
     DFA_states[stateIndex] = state;
-    string nextState;
+    char nextState[MAX];
     for(int i=0; i<numOfAlpha; i++){
         for(int j=0; j<countOfTransition[stateIndex][i]; j++){
             nextState += NFA_table[stateIndex][i][j]; 

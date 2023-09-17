@@ -42,26 +42,50 @@ void getDFA(){
     }
 }
 
-int similarity(char state1, char state2){
-    if(state1 == finalState && state2 == finalState && state1 == state2) return 1;
-    if(state1 == finalState && state2 != finalState) return 0;
-    else if(state1 != finalState && state2 == finalState) return 0;
-    else{
-        for(int i=0; i<numOfAlpha; i++){
-            
-            return similarity(transition[state1-'a'][i], transition[state2-'a'][i]);
-            
+void initTable(){
+    for(int i=0; i< numberOfState; i++){
+        for(int j=0; j<numberOfState; j++){
+            table[i][j] = -1;
         }
-        return 0;
     }
-   
+    for(int i=0; i< numberOfState; i++){
+        for(int j=0; j<numberOfState; j++){
+            if(states[i] == finalState || states[j] == finalState)
+                table[i][j] = 0;
+        }
+    }
+}
+
+int similarity(char state1, char state2){
+    //cout<<state1<<state2<<endl;
+    int result = -1;
+    for(int i=0; i<numOfAlpha; i++){
+        if(table[state1- 'A'][state2 - 'A'] != 1)
+            result = table[transition[state1-'A'][i]-'A'][transition[state2-'A'][i]-'A'];         
+    }
+    return result;
 }
 
 void minimize(){
-    for(int i=1; i<numberOfState; i++){
+    initTable();
+    
+    for(int i=0; i<numberOfState; i++){
         for(int j=0; j<i; j++){
-            cout<<"hello";
+            cout<< table[i][j] <<" ";
+        }
+        cout<<endl;
+    }
+
+    for(int i=numberOfState-1; i>0; i--){
+        for(int j=0; j<numberOfState; j++){
             table[i][j] = similarity(states[i], states[j]);
+        }
+    }
+
+    for(int i=numberOfState-1; i>0; i--){
+        for(int j=0; j<numberOfState; j++){
+            if(table[i][j] == -1)
+                table[i][j] == 1;  
         }
     }
 }
@@ -73,10 +97,10 @@ int main(){
     getDFA();
 
     finalState = 'D';
-    minimize();
+    minimize();   
 
     for(int i=0; i<numberOfState; i++){
-        for(int j=0; j<numberOfState; j++){
+        for(int j=0; j<i; j++){
             cout<< table[i][j] <<" ";
         }
         cout<<endl;

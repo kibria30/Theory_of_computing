@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// only work with lower trangle but problem with HF
+//jur kore milaylam so its working
 
 int numberOfState, numOfAlpha;
 char states[MAX];
@@ -46,8 +46,8 @@ void getDFA(){
 
 void printTable(){
     cout<<endl<<"Printed table:"<<endl;
-    for(int i=1; i<numberOfState; i++){
-        for(int j=0; j<i; j++){
+    for(int i=0; i<numberOfState; i++){
+        for(int j=0; j<numberOfState; j++){
             cout<< table[i][j] <<"\t";
         }
         cout<<endl;
@@ -55,12 +55,12 @@ void printTable(){
 }
 
 void initTable(){
-    for(int i=1; i< numberOfState; i++){
-        for(int j=0; j<i; j++){
+    for(int i=0; i< numberOfState; i++){
+        for(int j=0; j<numberOfState; j++){
             if(states[i] == finalState || states[j] == finalState)
                 table[i][j] = 'X';
-            else 
-                table[i][j] = '\0';
+
+            if( i == j) table[i][j] = '\0';   //jor kore milailam
         }
     }
 }
@@ -68,8 +68,11 @@ void initTable(){
 void similarity(char state1, char state2){
     cout<<state1<<state2<<endl;
     for(int i=0; i<numOfAlpha; i++){
-        if(table[state1 - 'A'][state2 - 'A'] == '\0')
+        if(table[state1 - 'A'][state2 - 'A'] == '\0'){
+            cout<<table[transition[state1-'A'][i]-'A'][transition[state2-'A'][i]-'A']<<" hello "<<endl;  
             table[state1 - 'A'][state2 - 'A'] = table[transition[state1-'A'][i]-'A'][transition[state2-'A'][i]-'A'];         
+
+        }
     }
 }
 
@@ -78,6 +81,8 @@ void minimize(){
     initTable();
     
     printTable();
+
+    //similarity('H', 'F');
 
     for(int iter = 0; iter<2; iter++){
         cout<<"iter-"<<iter+1<<endl;

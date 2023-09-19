@@ -65,6 +65,7 @@ void xyz(){
 
 
 int main(){
+    cout<<"Enter a, n, b, m: "<<endl;
     cin>>a>>m>>b>>n;
     
     for(int i=0; i<m; i++){

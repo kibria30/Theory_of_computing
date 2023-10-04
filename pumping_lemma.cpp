@@ -9,34 +9,38 @@ char expression[MAX];
 char x[MAX], y[MAX], z[MAX];
 
 bool pumping(){
-    int k;
-    cout<<"Enter k:";
-    cin>>k;
-    int len = strlen(y);
-    cout<<"lengt of y:"<<len<<endl;
-    char newY[MAX];
-    for(int i=0; i<k*len; i += len){
-        for(int j=0; j<len; j++){
-            newY[i] = y[j];
+    // int k;
+    // cout<<"Enter k:";
+    // cin>>k;
+    for(int k=0; k<200; k++){
+        int len = strlen(y);
+        cout<<"lengt of y:"<<len<<endl;
+        char newY[MAX];
+        for(int i=0; i<k*len; i += len){
+            for(int j=0; j<len; j++){
+                newY[i] = y[j];
+            }
+
+        }
+        newY[k*len] = '\0';
+        cout<<newY<<endl;
+
+        char newExpr[MAX] = "\0";
+        strcat(newExpr, x);
+        strcat(newExpr, newY);
+        strcat(newExpr, z);
+        cout<<"Regualar expression after pumping lemma: "<<newExpr<<endl;
+
+        int newN=0, newM=0;
+        for(int i=0; i<strlen(newExpr); i++){
+            if(newExpr[i] == a) newN++;
+            else newM++;
         }
 
+        if((float)newN/newM != ((float)n/m))
+            return false;
     }
-    newY[k*len] = '\0';
-    cout<<newY<<endl;
-
-    char newExpr[MAX] = "\0";
-    strcat(newExpr, x);
-    strcat(newExpr, newY);
-    strcat(newExpr, z);
-    cout<<"Regualar expression after pumping lemma: "<<newExpr<<endl;
-
-    int newN=0, newM=0;
-    for(int i=0; i<strlen(newExpr); i++){
-        if(newExpr[i] == a) newN++;
-        else newM++;
-    }
-
-    return ((float)newN/newM) == ((float)n/m);
+    return true;
 }
 
 void xyz(){
@@ -65,7 +69,7 @@ void xyz(){
 
 
 int main(){
-    cout<<"Enter a, n, b, m: "<<endl;
+    cout<<"Enter a, m, b, n: "<<endl;
     cin>>a>>m>>b>>n;
     
     for(int i=0; i<m; i++){

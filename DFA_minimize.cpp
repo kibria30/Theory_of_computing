@@ -67,7 +67,7 @@ void initTable(){
 void similarity(char state1, char state2){
     cout<<state1<<state2<<endl;
     for(int i=0; i<numOfAlpha; i++){
-        if(table[state1 - 'A'][state2 - 'A'] == '\0'){
+        if(table[state1 - 'A'][state2 - 'A'] == '\0') {
             table[state1 - 'A'][state2 - 'A'] = table[transition[state1-'A'][i]-'A'][transition[state2-'A'][i]-'A'];
             if(table[state1 - 'A'][state2 - 'A'] == '\0')
                 table[state1 - 'A'][state2 - 'A'] = table[transition[state2-'A'][i]-'A'][transition[state1-'A'][i]-'A'];

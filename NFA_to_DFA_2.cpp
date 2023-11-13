@@ -61,10 +61,10 @@ void convert(string curr){
     ptr++;
     DFA_states[ptr] = curr;
     set<char> state;
-    for(int i=0; i<strlen(curr); i++){
+    for(int i=0; i<curr.size(); i++){
         for(int j=0; j<numOfAlpha; j++){
-            state.clear():
-            for(int k=0; k<countOfTransition[curr[i]-'a'][j]){
+            state.clear();
+            for(int k=0; k<countOfTransition[curr[i]-'a'][j]; k++){
                 state.insert(NFA_table[curr[i]-'a'][j][k]);
             }
             DFA_table[curr] = state;
@@ -78,6 +78,6 @@ int main(){
     print_NFA_table();
     string start;
     cin >> start;
-    //convert(start);
+    convert(start);
 
 }

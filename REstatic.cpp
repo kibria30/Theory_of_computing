@@ -8,47 +8,6 @@ char alphabet[MAX];
 char transition[MAX][MAX];
 string store[100][100][100];
 
-void getDFA(){
-    cout<<"Number of states: ";
-    cin>>numberOfState;
-    cout<<"Enter states: "<<endl;
-    for(int i=0; i<numberOfState; i++){
-        cin>>states[i];
-    }
-
-    cout<<"Number of alphabet: ";
-    cin>>numOfAlpha;
-    cout<<"Enter alphabets:"<<endl;
-    for(int i=0; i<numOfAlpha; i++){
-        cin>>alphabet[i];
-    }
-
-    for(int i=0; i<numberOfState; i++){
-        for(int j=0; j<numOfAlpha; j++){
-            cout<<"From: "<<states[i]<<" Via: "<<alphabet[j]<<" to(which?): ";
-            cin>>transition[i][j];
-            
-        }
-    }
-
-    for(int i=0; i<numberOfState; i++){
-        for(int j=0; j<numOfAlpha; j++){
-            cout<<transition[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-}
-
-void initStore(){
-    for(int i=0; i<4; i++){
-        for(int j=0; j<4; j++){
-            for(int k=0; k<3; k++){
-                store[i][j][k] = "\0";
-            }
-        }
-    }
-}
-
 string RE(int i, int j, int k){
     if( k==0 ){
         if(i==1 && j==1) return " e + 1 ";
@@ -68,11 +27,6 @@ string RE(int i, int j, int k){
 
 int main()
 {
-    freopen("regular_input.txt", "r", stdin);
-
-    getDFA();
-
-    initStore();
 
     for(int k=0; k<3; k++){
         for(int i=1; i<4; i++){

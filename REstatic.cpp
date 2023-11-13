@@ -9,11 +9,14 @@ char transition[MAX][MAX];
 string store[100][100][100];
 
 string RE(int i, int j, int k){
+
+    //eikhane ekta mistake ase. Ami kiso khettre "NULL" ke "e" dhore kaj korsi
+
     if( k==0 ){
         if(i==1 && j==1) return " e + 1 ";
         else if((i == 2 && j == 2) || (i==1 && j==3)) return " e ";
         else if(i==3 && j==3) return " e + 0 ";
-        else if((i==1 && j==2) || (i==2 && j==3)) return " 0 ";
+        else if((i==1 && j==2) || (i==2 && j==3)) return " 0 ";  
         else if((i==2 && j==1) || (i==3 && j ==1)) return " 1 ";
         else return " e ";
     }

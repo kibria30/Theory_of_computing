@@ -78,7 +78,7 @@ int main() {
     }
     path.push_back(start);
     int n = path.size();
-    cout<<"path: ";
+    cout<<"path: ";        //path printing e jamela ase
     for(int i=0; i<n; i++){
         cout << path.back()<<" -> ";
         path.pop_back();

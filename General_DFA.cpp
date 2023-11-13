@@ -1,13 +1,15 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define MAX 1000
+
 int main()
 {
     int numberOfState, numOfAlpha;
-    char states[100000];
-    char alphabet[100000];
+    char states[MAX];
+    char alphabet[MAX];
     char end;
-    char transition[1000][1000];
+    char transition[MAX][MAX];
 
     cout<<"Number of states: ";
     cin>>numberOfState;

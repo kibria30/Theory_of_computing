@@ -18,7 +18,7 @@ bool pumping(){
         char newY[MAX];
         for(int i=0; i<k*len; i += len){
             for(int j=0; j<len; j++){
-                newY[i] = y[j];
+                newY[i] = y[j];              // eikhane ekto vul ase (newY = newY + k*y) ei logic lagbe
             }
 
         }
